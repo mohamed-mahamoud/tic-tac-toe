@@ -1,4 +1,4 @@
-tableau=[[" "," "," "],[" "," "," "],[" "," "," "]]
+import random
 
 def affichage(tableau):
     for i in tableau:
@@ -38,6 +38,65 @@ def placement(table,tour):
             x,y=map(int,input("erreur cett case est déja jouer ou est est mauvaise choisisez une autre ").split())
         table[x][y]="O"        
 
+
+def ia_p(tableau,tour):
+    for i in range (3):
+        for j in range (3):
+            if tableau[i][j]==" ":
+                tableau[i][j]="O"
+                w=gagne_condition(tableau,2)
+                if w:
+                    tour=1
+                    return
+                else:
+                    tableau[i][j]=" "
+    for i in range (3):
+        for j in range (3):
+            if tableau[i][j]==" ":
+                tableau[i][j]="X"
+                w=gagne_condition(tableau,1)
+                if w:
+                    tableau[i][j]="O"
+                    tour=2
+                    return
+                else:
+                    tableau[i][j]=" "
+    x=random.randint(0,2)
+    y=random.randint(0,2)
+    while tableau[x][j]!=" ":
+        x=random.randint(0,2)
+        y=random.randint(0,2)
+    tableau[x][y]="O"
+    tour=2               
+                                     
+        
+
+def jouer_contre_ia():
+    joueur=1
+    win=False
+    tour=0
+    tableau=[[" "," "," "],[" "," "," "],[" "," "," "]]
+    print("bienvenue dans cette partie contre ia")
+    affichage(tableau)  
+    while not win and tour<9:
+        placement(tableau,joueur)
+        affichage(tableau)
+        win=gagne_condition(tableau,joueur)
+        print("c'est le tour de l'ia")
+        ia_p(tableau,joueur)
+        affichage(tableau)
+        win=gagne_condition(tableau,2)
+        if win:
+            win_ia=gagne_condition(tableau,2)
+            if win_ia: 
+                print("perdu ordinateur à gagner ")
+            else:
+                print("bravo tu as gagner ")    
+        else:
+            tour+=1      
+    if not win and tour==9:
+        print("c'est une égalité")
+
 def contre_joueur():
     joueur=1
     win=False
@@ -59,4 +118,4 @@ def contre_joueur():
             joueur=1        
     if not win and tour==9:
         print("c'est une égalité")            
-contre_joueur()    
+jouer_contre_ia()
