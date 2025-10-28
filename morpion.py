@@ -1,5 +1,12 @@
 import random
-
+import pygame
+import sys
+run = True
+largeur=400
+longeur=400
+blanc=(255,255,255)
+ligne_couleur=(0,0,0)
+police=pygame.font.SysFont(None,40)
 def affichage(tableau):
     for i in tableau:
         print(f"+{"-"*3}"*3+"+")
@@ -46,7 +53,7 @@ def ia_p(tableau,tour):
                 tableau[i][j]="O"
                 w=gagne_condition(tableau,2)
                 if w:
-                    tour=1
+                    tour=2
                     return
                 else:
                     tableau[i][j]=" "
@@ -57,7 +64,7 @@ def ia_p(tableau,tour):
                 w=gagne_condition(tableau,1)
                 if w:
                     tableau[i][j]="O"
-                    tour=2
+                    tour=1
                     return
                 else:
                     tableau[i][j]=" "
@@ -67,7 +74,8 @@ def ia_p(tableau,tour):
         x=random.randint(0,2)
         y=random.randint(0,2)
     tableau[x][y]="O"
-    tour=2               
+    tour=2
+             
                                      
         
 
@@ -125,4 +133,37 @@ while choix!=1 and choix!=2:
 if choix==1:
     jouer_contre_ia()
 else :
-    contre_joueur()        
+    contre_joueur()
+    
+while run :
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            run=False    
+
+pygame.init()
+screen=pygame.display.set_mode((largeur,longeur+100),0,32)
+pygame.display.set_caption("jeu du morpion")
+x_img=pygame.image.load("marque-x.png")
+o_img=pygame.image.load("O.png")
+x_img=pygame.transform.scale(x_img,(80,80))
+o_img=pygame.transform.scale(o_img,(80,80))
+
+def choix_de_mode():
+    bouton_jcj=pygame.Rect(150,150,130)
+    bouton_vs_ia=pygame.Rect(150,150,130)
+    mode=None
+    run=True
+    while run:
+        screen.fill(0,0,0)
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                if bouton_jcj.collidepoint(event.pos):
+                    mode="JcJ"
+                elif bouton_vs_ia.collidepoint(event.pos):
+                    mode="cIa"
+        pygame.draw.rect(screen,(46,204,113),border_radius=10)
+        pygame.draw.rect(screen,(70,130,180),border_radius=10)
+        texte_JcJ=                              
