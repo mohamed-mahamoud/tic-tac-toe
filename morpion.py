@@ -135,10 +135,6 @@ if choix==1:
 else :
     contre_joueur()
     
-while run :
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            run=False    
 
 pygame.init()
 screen=pygame.display.set_mode((largeur,longeur+100),0,32)
@@ -166,4 +162,21 @@ def choix_de_mode():
                     mode="cIa"
         pygame.draw.rect(screen,(46,204,113),border_radius=10)
         pygame.draw.rect(screen,(70,130,180),border_radius=10)
-        texte_JcJ=                              
+        texte_JcJ=police.render("JcJ",True,blanc)
+        texte_vsIa=police.render(screen,True,blanc)
+        screen.blit(texte_JcJ,(bouton_jcj.centerx - texte_JcJ.get_width()//2,bouton_jcj.centery - texte_JcJ.get_height()//2))
+        screen.blit(texte_vsIa,(bouton_vs_ia.centerx - texte_vsIa.get_width()//2,bouton_vs_ia.centery - texte_vsIa.get_height()//2))
+        pygame.display.flip()
+    return mode
+
+def commencement_du_jeu():
+    pygame.display.update()
+    screen.fill(blanc)
+    #trace les ligne vertical
+    pygame.draw.line(screen,ligne_couleur,(largeur/3,0),(largeur/3,longeur),7)
+    pygame.draw.line(screen,ligne_couleur,(largeur/3*2,0),(largeur/3*2,longeur),7)
+    #trace les ligne horizontaux
+    pygame.draw.line(screen,ligne_couleur,(0,longeur/3),(largeur,longeur/3),7)
+    pygame.draw.line(screen,ligne_couleur,(0,longeur/3*2),(largeur,longeur/3*2),7)
+    
+                                           
