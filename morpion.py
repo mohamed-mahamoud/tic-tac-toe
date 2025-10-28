@@ -118,4 +118,11 @@ def contre_joueur():
             joueur=1        
     if not win and tour==9:
         print("c'est une égalité")            
-jouer_contre_ia()
+
+choix=int(input("bienvenue dans cette partie de morpion \nveiller choisir si vous vouler jouer contre ia en choissiant 1 ou contre un joueur avec 2 "))
+while choix!=1 and choix!=2:
+    choix=int(input("veilleur choisir la difficulté "))
+if choix==1:
+    jouer_contre_ia()
+else :
+    contre_joueur()        
