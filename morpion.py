@@ -24,31 +24,39 @@ def gagne_condition(tableau,tour):
 def placement(table,tour):
     print(f"c'est le tour du joueur {tour} de joué")
     if tour==1:
-        x,y=map(int,input(" placer les cordonné de la case que vous vouler cocher ").split())
-        while table[x][y]!=" ":
+        x,y=map(int,input(" placer les cordonné de la case que vous vouler cocher tel que par exemple 1 2: ").split())
+        while (x<0 or x>2 ) or (y<0 or y>2 ):
+            x,y=map(int,input(" les cordonné ne sont pas bons veiller rechoisir ").split())
+        while table[x][y]!=" " :
             x,y=map(int,input("erreur cett case est déja jouer choisisez une autre ").split())
-        tableau[x][y]="X"
+        table[x][y]="X"
     elif tour==2 :
-        x,y=map(int,input(" placer les cordonné de la case que vous vouler cocher ").split())
-        while table[x][y]!=" ":
-            x,y=map(int,input("erreur cett case est déja jouer choisisez une autre ").split())
+        x,y=map(int,input(" placer les cordonné de la case que vous vouler cocher tel que par exemple 1 2:  ").split())
+        while (x<0 or x>2) or (y<0 or y>2):
+            x,y=map(int,input(" les cordonné ne sont pas bons veiller rechoisir ").split())
+        while table[x][y]!=" " or (x<0 and x>2) or (y<0 and y>2)  :
+            x,y=map(int,input("erreur cett case est déja jouer ou est est mauvaise choisisez une autre ").split())
         table[x][y]="O"        
-joueur=1
-win=False
-tour=0
-while not win and tour<9:
-    placement(tableau,joueur)
-    affichage(tableau)
-    win=gagne_condition(tableau,joueur)
-    if win:
-        print(f"bravo jouer {joueur} à gagner ")
-    else:
-        tour+=1
-    if joueur==1:
-        joueur=2
-    else:
-        joueur=1        
-if not win and tour==9:
-    print("c'est une égalité")            
-    
-#il me reste a poser la securité pour avoir les bonne cordonné et faire le message de début 
+
+def contre_joueur():
+    joueur=1
+    win=False
+    tour=0
+    tableau=[[" "," "," "],[" "," "," "],[" "," "," "]]   
+    print("bienvenue dans cette partie de morpion en joueur contre joueur")
+    affichage(tableau)  
+    while not win and tour<9:
+        placement(tableau,joueur)
+        affichage(tableau)
+        win=gagne_condition(tableau,joueur)
+        if win:
+            print(f"bravo jouer {joueur} à gagner ")
+        else:
+            tour+=1
+        if joueur==1:
+            joueur=2
+        else:
+            joueur=1        
+    if not win and tour==9:
+        print("c'est une égalité")            
+contre_joueur()    
