@@ -7,11 +7,7 @@ def affichage(tableau):
     print(f"+{"-"*3}"*3+"+")
 
 def gagne_condition(tableau,tour):
-    if tour==1:
-        symbole="X"
-    else:
-        symbole="O"    
-    
+    symbole = "X" if tour ==1 else "0"      
     w=False
     for i in range(3):
         if tableau[i][0]==tableau[i][1]==tableau[i][2]==symbole or tableau[0][i]==tableau[1][i]==tableau[2][i]==symbole :
