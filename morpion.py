@@ -7,15 +7,13 @@ def affichage(tableau):
     print(f"+{"-"*3}"*3+"+")
 
 def gagne_condition(tableau,tour):
-    symbole = "X" if tour ==1 else "0"      
-    w=False
+    symbole = "X" if tour ==1 else "O"      
     for i in range(3):
         if tableau[i][0]==tableau[i][1]==tableau[i][2]==symbole or tableau[0][i]==tableau[1][i]==tableau[2][i]==symbole :
-            w=True
-            return w
-    if tableau[0][0]==tableau[1][1]==tableau[2][2]==symbole or tableau[0][2]==tableau[1][1]==tableau[2][0]==symbole:
-        w=True           
-    return w 
+            return True
+    if tableau[0][0]==tableau[1][1]==tableau[2][2]==symbole or tableau[0][2]==tableau[1][1]==tableau[2][0]==symbole:          
+        return True
+    return False
 def placement(table,tour):
     print(f"c'est le tour du joueur {tour} de joué")
     symbole = "X" if tour ==1 else "0"
@@ -35,24 +33,21 @@ def placement(table,tour):
         break
 
 def ia_p(tableau,tour):
-    for i in tableau:
-        for j in i:
+    for i in range(3):
+        for j in range(3):
             if tableau[i][j]==" ":
                 tableau[i][j]="O"
-                w=gagne_condition(tableau,2)
-                if w:
-                    tour=1
+                if gagne_condition(tableau,2):
                     return
                 else:
                     tableau[i][j]=" "
-    for i in tableau:
-        for j in i:
+    for i in range(3):
+        for j in range(3):
             if tableau[i][j]==" ":
                 tableau[i][j]="X"
-                w=gagne_condition(tableau,1)
-                if w:
+                if gagne_condition(tableau,1):
                     tableau[i][j]="O"
-                    tour=2
+                    tour=1
                     return
                 else:
                     tableau[i][j]=" "
@@ -91,10 +86,10 @@ def jouer_contre_ia():
             egalite=match_nul(tableau)
         if winJ:
               print("bravo tu as gagné")
-        if winI:
+        elif winI:
             print("Perdu l'ia a gagné")      
-    if (not winJ and not winI) and egalite:
-        print("c'est une égalité")
+        elif (not winJ and not winI) and egalite:
+            print("c'est une égalité")
 
 def contre_joueur():
     joueur=1
@@ -120,7 +115,7 @@ def contre_joueur():
 choix=input("bienvenue dans cette partie de morpion \nveiller choisir si vous vouler jouer contre ia en choissiant 1 ou contre un joueur avec 2 ")
 while (choix!=1 and choix!=2) and not choix.isdigit() :
     choix=input("veilleur choisir la difficulté ")
-if choix==1:
+if choix=="1":
     jouer_contre_ia()
 else :
     contre_joueur()        
