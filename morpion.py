@@ -296,7 +296,7 @@ def choix_de_la_difficulté():
                    mode="Normal"
                    run=False
         pygame.draw.rect(screen,(46,204,113),bouton_facile,border_radius=10)
-        pygame.draw.rect(screen,(0,162,232),bouton_facile,border_radius=10)
+        pygame.draw.rect(screen,(70,130,180),bouton_normal,border_radius=10)
         texte_facile=police.render("Facile",True,blanc)
         texte_normal=police.render("Normal",True,blanc)
         screen.blit(texte_facile,(bouton_facile.centerx - texte_facile.get_width()//2,
