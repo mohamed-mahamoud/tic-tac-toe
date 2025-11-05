@@ -63,6 +63,8 @@ def ia_facil():
 
 def ia_p():
     global tableau,gagnant,tour,egalite
+    original_gagnant=gagnant
+    original_egalite = egalite
     #cherche de gagner
     for i in range(3):
         for j in range (3):
@@ -75,6 +77,8 @@ def ia_p():
                     return
                 else:
                     tableau[i][j]=" "
+                    gagnant=original_gagnant
+                    egalite=original_egalite
     #bloque l'adversaire
     for i in range (3):
         for j in range (3):
@@ -83,12 +87,17 @@ def ia_p():
                 gagne_condition()
                 if gagnant=="X":
                     tableau[i][j]="O"
+                    gagnant=original_gagnant
+                    egalite=original_egalite
                     dessiner_XO(i+1,j+1)
                     gagnant=None
                     affiche_statue() 
                     return
                 else:
                     tableau[i][j]=" "
+                    gagnant=original_gagnant
+                    egalite=original_egalite
+    #joue un coup aléatoire
     x=random.randint(0,2)
     y=random.randint(0,2)
     while tableau[x][y]!=" ":
